@@ -17,8 +17,12 @@ from matplotlib.figure import Figure
 import pandas as pd
 import numpy as np
 import random
-import matplotlib.animation as animation
+import time
+import _thread
 import serial
+import json
+import pygame
+import matplotlib.animation as animation
 #from form import Ui_Sound_Detection       #import new create .py file
 from form import *  #导入form.py
 

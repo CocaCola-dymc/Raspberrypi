@@ -37,7 +37,8 @@ class Ui_Sound_Detection(object):
         self.widget.setObjectName("widget")
 
         self.set_matplotlib()
-        self.com = 0
+        self.probe = 0
+        self.probe_temp = 0
         self.recv = ''
         self.volume = 0
 
@@ -198,8 +199,10 @@ class Ui_Sound_Detection(object):
             self.ax.autoscale_view()
             self.ax.cla()       #清空画布
             self.x = ['1', '2', '3', '4', '5', '6']
-            self.y = [0,0,0,0,0,0]
-            self.com = int(self.com)
+#            self.y = [0,0,0,0,0,0]
+            self.probe = int(self.probe)
+            #设置y轴的范围
+            self.ax.set_ylim(0,100)
 
 #            if(self.recv):
 #                for data in self.recv:
@@ -209,36 +212,64 @@ class Ui_Sound_Detection(object):
 #                    print(type(self.probe[0]),type(self.value[0]))
 #            else:
 #                pass
-#            if(self.probe == 1):
-#                self.y[0] = self.recv
-#            elif(self.probe == 2):
-#                self.y[1] = self.recv
-#            elif(self.probe == 3):
-#                self.y[2] = self.recv
-#            elif(self.probe == 4):
-#                self.y[3] = self.recv
-#            elif(self.probe == 5):
-#                self.y[4] = self.recv
-#            elif(self.probe == 6):
-#                self.y[5] = self.recv
-#            else:
-#                pass
 
-            #设置y轴的范围
-            self.ax.set_ylim(0,100)
-
-            if(self.probe == 0):
+            if(self.probe != 0 and self.probe != self.probe_temp):
+                self.probe_temp = self.probe
                 self.y = [0,0,0,0,0,0]
-                #生成柱状图
-                self.ax.bar(self.x,self.y,color=(1,0.5,0),width=0.6)
-            else:
-                #生成柱状图
-#                print(self.y)
-                self.ax.bar(self.x,self.y,color=(1,0.5,0),width=0.6)
-                #将数值显示在对应的柱子上
-                #第一个x表示在x轴的位置,第一个y表示在y轴的位置,+2表示往上移动一点位置,以免挡住数字，
-                #第二个y表示显示的内容,ha='center'表示数字居中，size为数字大小
-#                self.ax.text(self.x[self.probe-1],self.y[self.probe-1]+2,self.y[self.probe-1],ha='center',size=24)
+                self.erji1.setPixmap(QtGui.QPixmap("images/erji.jpg"))
+                self.erji2.setPixmap(QtGui.QPixmap("images/erji.jpg"))
+                self.erji3.setPixmap(QtGui.QPixmap("images/erji.jpg"))
+                self.erji4.setPixmap(QtGui.QPixmap("images/erji.jpg"))
+                self.erji5.setPixmap(QtGui.QPixmap("images/erji.jpg"))
+                self.erji6.setPixmap(QtGui.QPixmap("images/erji.jpg"))
+
+#                if(self.probe == 1):
+#                    self.erji1.setPixmap(QtGui.QPixmap("images/erji_active.jpg"))
+#                    self.y[self.probe-1] = 10
+#                    self.ax.text(self.x[0],self.y[0]+2,self.y[0],ha='center',size=24)
+#                elif(self.probe == 2):
+#                    self.erji2.setPixmap(QtGui.QPixmap("images/erji_active.jpg"))
+#                    self.y[self.probe-1] = 20
+#                    self.ax.text(self.x[1],self.y[1]+2,self.y[1],ha='center',size=24)
+#                elif(self.probe == 3):
+#                    self.erji3.setPixmap(QtGui.QPixmap("images/erji_active.jpg"))
+#                    self.y[self.probe-1] = 30
+#                    self.ax.text(self.x[2],self.y[2]+2,self.y[2],ha='center',size=24)
+#                elif(self.probe == 4):
+#                    self.erji4.setPixmap(QtGui.QPixmap("images/erji_active.jpg"))
+#                    self.y[self.probe-1] = 40
+#                    self.ax.text(self.x[3],self.y[3]+2,self.y[3],ha='center',size=24)
+#                elif(self.probe == 5):
+#                    self.erji5.setPixmap(QtGui.QPixmap("images/erji_active.jpg"))
+#                    self.y[self.probe-1] = 50
+#                    self.ax.text(self.x[4],self.y[4]+2,self.y[4],ha='center',size=24)
+#                elif(self.probe == 6):
+#                    self.erji6.setPixmap(QtGui.QPixmap("images/erji_active.jpg"))
+#                    self.y[self.probe-1] = 60
+#                    self.ax.text(self.x[5],self.y[5]+2,self.y[5],ha='center',size=24)
+#                else:
+#                    pass
+                for i in range(1,6):
+                    if(self.probe == i):
+                        self.erji[i].setPixmap(QtGui.QPixmap("images/erji_active.jpg"))
+                        self.y[i-1] = 60
+                        self.ax.text(self.x[i-1],self.y[i-1]+2,self.y[i-1],ha='center',size=24)
+
+            elif(self.probe == 0):
+                self.y = [0,0,0,0,0,0]
+                self.erji1.setPixmap(QtGui.QPixmap("images/erji.jpg"))
+                self.erji2.setPixmap(QtGui.QPixmap("images/erji.jpg"))
+                self.erji3.setPixmap(QtGui.QPixmap("images/erji.jpg"))
+                self.erji4.setPixmap(QtGui.QPixmap("images/erji.jpg"))
+                self.erji5.setPixmap(QtGui.QPixmap("images/erji.jpg"))
+                self.erji6.setPixmap(QtGui.QPixmap("images/erji.jpg"))
+
+            #生成柱状图
+            self.ax.bar(self.x,self.y,color=(1,0.5,0),width=0.6)
+            #将数值显示在对应的柱子上
+            #第一个x表示在x轴的位置,第一个y表示在y轴的位置,+2表示往上移动一点位置,以免挡住数字，
+            #第二个y表示显示的内容,ha='center'表示数字居中，size为数字大小
+#            self.ax.text(self.x[self.probe-1],self.y[self.probe-1]+2,self.y[self.probe-1],ha='center',size=24)
 
             self.fig.canvas.draw()          # 画布重绘 self.figs.canvas
             self.fig.canvas.flush_events()  # 画布刷新 self.figs.canvas
@@ -249,24 +280,25 @@ class Ui_Sound_Detection(object):
     def keyPressEvent(self, event):
         while True:
 #            print("press:" + str(event.key()))
-            if(event.key() == Qt.Key_1):
-                self.com = 1
+            if(event.key() == Qt.Key_0):
+                self.probe = 0
+            elif(event.key() == Qt.Key_1):
+                self.probe = 1
             elif(event.key() == Qt.Key_2):
-                self.com = 2
+                self.probe = 2
             elif(event.key() == Qt.Key_3):
-                self.com = 3
+                self.probe = 3
             elif(event.key() == Qt.Key_4):
-                self.com = 4
+                self.probe = 4
             elif(event.key() == Qt.Key_5):
-                self.com = 5
+                self.probe = 5
             elif(event.key() == Qt.Key_6):
-                self.com = 6
+                self.probe = 6
             else:
                 pass
             time.sleep(0.1)
             break
             _thread.start_new_thread(self.keyPressEvent,())
-
 
     def serial(self):
         ser = serial.Serial('/dev/ttyAMA0',9600,timeout=1)
@@ -292,8 +324,8 @@ class Ui_Sound_Detection(object):
                 #将当前音量存储在volume中,用于判断音量是否变化
                 self.volume = self.recv
                 pygame.mixer.init()
-                pygame.mixer.music.load('/home/pi/aduio/warning.wav')
-                pygame.mixer.music.set_volume(float(self.recv/100))
+                pygame.mixer.music.load('warning.wav')
+                pygame.mixer.music.set_volume(self.recv/100)
                 pygame.mixer.music.play()
 #                while pygame.mixer.music.get_busy():  # 在音频播放为完成之前不退出程序
 #                    pass
