@@ -29,11 +29,11 @@ class Sound_Detection(QtWidgets.QWidget,Ui_Sound_Detection):
 #        self.load_ui()
         self.setupUi(self)
 
-    def filter_high1(self):
+#    def filter_high1(self):
 
 #        self.fresh_flag = not self.fresh_flag       #将标志位取反
 #        self.label.setText(str(self.s))
-        self.serial()
+#        self.keyPressEvent()
 #        self.plotfig()
 
 #    def filter_low1(self):
