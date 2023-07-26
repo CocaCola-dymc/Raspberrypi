@@ -22,6 +22,8 @@ import random
 import time
 import _thread
 import serial
+import json
+import pygame
 import matplotlib.animation as animation
 
 class Ui_Sound_Detection(object):
@@ -35,8 +37,9 @@ class Ui_Sound_Detection(object):
         self.widget.setObjectName("widget")
 
         self.set_matplotlib()
-        self.probe = 0
+        self.com = 0
         self.recv = ''
+        self.volume = 0
 
         self.layoutWidget = QtWidgets.QWidget(self.widget)
         self.layoutWidget.setGeometry(QtCore.QRect(150, 613, 671, 61))
@@ -187,6 +190,7 @@ class Ui_Sound_Detection(object):
         _thread.start_new_thread(self.plotfig,())
         _thread.start_new_thread(self.serial,())
         _thread.start_new_thread(self.keyPressEvent,())
+        _thread.start_new_thread(self.music,())
 
     #开始绘图
     def plotfig(self):
@@ -195,15 +199,16 @@ class Ui_Sound_Detection(object):
             self.ax.cla()       #清空画布
             self.x = ['1', '2', '3', '4', '5', '6']
             self.y = [0,0,0,0,0,0]
-            self.probe = int(self.probe)
+            self.com = int(self.com)
 
-            if(self.recv != ''):
-                self.str = self.recv.split(':')
-                self.number = int(self.str[0])
-                self.data = int(self.str[1])
-                self.y[self.number-1] = self.data
-            else:
-                continue
+#            if(self.recv):
+#                for data in self.recv:
+#                    print(data)
+#                    self.probe.append(data['probe'])
+#                    self.value.append(data['value'])
+#                    print(type(self.probe[0]),type(self.value[0]))
+#            else:
+#                pass
 #            if(self.probe == 1):
 #                self.y[0] = self.recv
 #            elif(self.probe == 2):
@@ -228,11 +233,12 @@ class Ui_Sound_Detection(object):
                 self.ax.bar(self.x,self.y,color=(1,0.5,0),width=0.6)
             else:
                 #生成柱状图
+#                print(self.y)
                 self.ax.bar(self.x,self.y,color=(1,0.5,0),width=0.6)
                 #将数值显示在对应的柱子上
                 #第一个x表示在x轴的位置,第一个y表示在y轴的位置,+2表示往上移动一点位置,以免挡住数字，
                 #第二个y表示显示的内容,ha='center'表示数字居中，size为数字大小
-                self.ax.text(self.x[self.probe-1],self.y[self.probe-1]+2,self.y[self.probe-1],ha='center',size=24)
+#                self.ax.text(self.x[self.probe-1],self.y[self.probe-1]+2,self.y[self.probe-1],ha='center',size=24)
 
             self.fig.canvas.draw()          # 画布重绘 self.figs.canvas
             self.fig.canvas.flush_events()  # 画布刷新 self.figs.canvas
@@ -244,17 +250,17 @@ class Ui_Sound_Detection(object):
         while True:
 #            print("press:" + str(event.key()))
             if(event.key() == Qt.Key_1):
-                self.probe = 1
+                self.com = 1
             elif(event.key() == Qt.Key_2):
-                self.probe = 2
+                self.com = 2
             elif(event.key() == Qt.Key_3):
-                self.probe = 3
+                self.com = 3
             elif(event.key() == Qt.Key_4):
-                self.probe = 4
+                self.com = 4
             elif(event.key() == Qt.Key_5):
-                self.probe = 5
+                self.com = 5
             elif(event.key() == Qt.Key_6):
-                self.probe = 6
+                self.com = 6
             else:
                 pass
             time.sleep(0.1)
@@ -278,9 +284,21 @@ class Ui_Sound_Detection(object):
             #ser.close()
         #_thread.start_new_thread(self.serial,())
 
-    def fresh(self):
+    def music(self):
         while True:
-            if self.fresh_flag:
-                self.plotfig()
+            #当传入音量大小以及音量大小与上次不同的时候才重新播放音频
+            if(self.recv and int(self.recv) != self.volume):
+                self.recv = int(self.recv)
+                #将当前音量存储在volume中,用于判断音量是否变化
+                self.volume = self.recv
+                pygame.mixer.init()
+                pygame.mixer.music.load('/home/pi/aduio/warning.wav')
+                pygame.mixer.music.set_volume(float(self.recv/100))
+                pygame.mixer.music.play()
+#                while pygame.mixer.music.get_busy():  # 在音频播放为完成之前不退出程序
+#                    pass
             else:
-                break
+                pass
+        time.sleep(0.1)
+
+
