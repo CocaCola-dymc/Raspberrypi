@@ -31,9 +31,9 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>150</x>
+      <x>140</x>
       <y>613</y>
-      <width>671</width>
+      <width>691</width>
       <height>61</height>
      </rect>
     </property>
@@ -42,7 +42,7 @@
       <number>5</number>
      </property>
      <property name="leftMargin">
-      <number>20</number>
+      <number>25</number>
      </property>
      <property name="rightMargin">
       <number>0</number>
@@ -119,7 +119,7 @@
     <property name="geometry">
      <rect>
       <x>900</x>
-      <y>40</y>
+      <y>50</y>
       <width>141</width>
       <height>20</height>
      </rect>
@@ -160,10 +160,7 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-radius: 10%;
-border: 1px solid black;
-background-image: url(/home/pi/aduio/images/filter_high.png);
-background-repeat: no-repeat;</string>
+     <string notr="true">border-radius: 10%;border: 1px solid black;background-image: url(/home/pi/aduio/images/filter_high.png);background-repeat: no-repeat;</string>
     </property>
     <property name="text">
      <string/>
@@ -194,10 +191,7 @@ background-repeat: no-repeat;</string>
      </size>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-radius: 10%;
-border: 1px solid black;
-background-image: url(/home/pi/aduio/images/filter_low.png);
-background-repeat: no-repeat;</string>
+     <string notr="true">border-radius: 10%;border: 1px solid black;background-image: url(/home/pi/aduio/images/filter_low.png);background-repeat: no-repeat;</string>
     </property>
     <property name="text">
      <string/>
@@ -228,10 +222,7 @@ background-repeat: no-repeat;</string>
      </size>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-radius: 10%;
-border: 1px solid black;
-background-image: url(/home/pi/aduio/images/com_probe.png);
-background-repeat: no-repeat;</string>
+     <string notr="true">border-radius: 10%;border: 1px solid black;background-image: url(/home/pi/aduio/images/com_probe.png);background-repeat: no-repeat;</string>
     </property>
     <property name="text">
      <string/>
@@ -262,10 +253,7 @@ background-repeat: no-repeat;</string>
      </size>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-radius: 10%;
-border: 1px solid black;
-background-image: url(/home/pi/aduio/images/brightness.png);
-background-repeat: no-repeat;</string>
+     <string notr="true">border-radius: 10%;border: 1px solid black;background-image: url(/home/pi/aduio/images/brightness.png);background-repeat: no-repeat;</string>
     </property>
     <property name="text">
      <string/>
@@ -296,10 +284,7 @@ background-repeat: no-repeat;</string>
      </size>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-radius: 10%;
-border: 1px solid black;
-background-image: url(/home/pi/aduio/images/battery_levels.png);
-background-repeat: no-repeat;</string>
+     <string notr="true">border-radius: 10%;border: 1px solid black;background-image: url(/home/pi/aduio/images/battery_levels.png);background-repeat: no-repeat;</string>
     </property>
     <property name="text">
      <string/>
@@ -314,17 +299,36 @@ background-repeat: no-repeat;</string>
      <bool>false</bool>
     </property>
    </widget>
+   <widget class="QProgressBar" name="progressBar">
+    <property name="geometry">
+     <rect>
+      <x>910</x>
+      <y>20</y>
+      <width>118</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QProgressBar{text-align:center;border:2px solid black}QProgressBar::chunk{background-color:write;}</string>
+    </property>
+    <property name="value">
+     <number>24</number>
+    </property>
+   </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>940</x>
-      <y>20</y>
-      <width>68</width>
-      <height>22</height>
+      <x>870</x>
+      <y>16</y>
+      <width>32</width>
+      <height>32</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(/home/pi/aduio/images/power_g.png);background-repeat: no-repeat;</string>
+    </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string/>
     </property>
    </widget>
    <zorder>layoutWidget</zorder>
@@ -335,6 +339,7 @@ background-repeat: no-repeat;</string>
    <zorder>battery_levels</zorder>
    <zorder>horizontal_line</zorder>
    <zorder>vertical_line</zorder>
+   <zorder>progressBar</zorder>
    <zorder>label</zorder>
   </widget>
  </widget>
