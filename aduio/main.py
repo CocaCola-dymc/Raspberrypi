@@ -26,21 +26,23 @@ class Sound_Detection(QtWidgets.QWidget,Ui_Sound_Detection,Function):
         self.recv = ''
         self.volume = 0
         self.power = 100
+        self.power_temp = 0
+        self.direction = ''
 
-#    def filter_high1(self):
-#        self.progressBar.setProperty("value", 100)
+    def filter_high1(self):
+        self.power = 100
 
-#    def filter_low1(self):
-#        self.progressBar.setProperty("value", 80)
+    def filter_low1(self):
+        self.power = 80
 
-#    def com_probe1(self):
-#        self.progressBar.setProperty("value", 40)
+    def com_probe1(self):
+        self.power = 40
 
-#    def battery_levels1(self):
-#        self.progressBar.setProperty("value", 20)
+    def battery_levels1(self):
+        self.power = 20
 
-#    def brightness1(self):
-#        self.progressBar.setProperty("value", 10)
+    def brightness1(self):
+        self.power = 10
 
 
 if __name__ == "__main__":
