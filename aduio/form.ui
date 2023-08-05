@@ -141,7 +141,7 @@
      <enum>Qt::Vertical</enum>
     </property>
    </widget>
-   <widget class="QPushButton" name="filter_high">
+   <widget class="QPushButton" name="button1">
     <property name="geometry">
      <rect>
       <x>910</x>
@@ -175,7 +175,7 @@
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="filter_low">
+   <widget class="QPushButton" name="button2">
     <property name="geometry">
      <rect>
       <x>910</x>
@@ -206,7 +206,7 @@
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="com_probe">
+   <widget class="QPushButton" name="button3">
     <property name="geometry">
      <rect>
       <x>910</x>
@@ -237,7 +237,7 @@
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="brightness">
+   <widget class="QPushButton" name="button5">
     <property name="geometry">
      <rect>
       <x>910</x>
@@ -268,7 +268,7 @@
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="battery_levels">
+   <widget class="QPushButton" name="button4">
     <property name="geometry">
      <rect>
       <x>910</x>
@@ -299,7 +299,7 @@
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QProgressBar" name="progressBar">
+   <widget class="QProgressBar" name="battery_power">
     <property name="geometry">
      <rect>
       <x>910</x>
@@ -331,16 +331,45 @@
      <string/>
     </property>
    </widget>
+   <widget class="QProgressBar" name="choose_value">
+    <property name="geometry">
+     <rect>
+      <x>1110</x>
+      <y>80</y>
+      <width>100</width>
+      <height>481</height>
+     </rect>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QProgressBar{text-align: center;border:2px solid black;font-weight:bold}QProgressBar::chunk{background-color: rgb(255,127,0);}</string>
+    </property>
+    <property name="minimum">
+     <number>0</number>
+    </property>
+    <property name="value">
+     <number>24</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+    <property name="textDirection">
+     <enum>QProgressBar::BottomToTop</enum>
+    </property>
+   </widget>
    <zorder>layoutWidget</zorder>
-   <zorder>filter_high</zorder>
-   <zorder>filter_low</zorder>
-   <zorder>com_probe</zorder>
-   <zorder>brightness</zorder>
-   <zorder>battery_levels</zorder>
+   <zorder>button1</zorder>
+   <zorder>button2</zorder>
+   <zorder>button3</zorder>
+   <zorder>button5</zorder>
+   <zorder>button4</zorder>
    <zorder>horizontal_line</zorder>
    <zorder>vertical_line</zorder>
-   <zorder>progressBar</zorder>
+   <zorder>battery_power</zorder>
    <zorder>label</zorder>
+   <zorder>choose_value</zorder>
   </widget>
  </widget>
  <resources/>
