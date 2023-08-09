@@ -41,7 +41,7 @@ class Function(object):
         _thread.start_new_thread(self.keyPressEvent,())
         #_thread.start_new_thread(self.buttonEvent,())
         #_thread.start_new_thread(self.music,())
-        #_thread.start_new_thread(self.battery,())
+        _thread.start_new_thread(self.battery,())
 
     #开始绘图
     def plotfig(self):          #(0.5s)
@@ -88,29 +88,29 @@ class Function(object):
             #第二个y表示显示的内容,ha='center'表示数字居中，size为数字大小
             self.fig.canvas.draw()          # 画布重绘 self.figs.canvas(0.25s)
             self.fig.canvas.flush_events()  # 画布刷新 self.figs.canvas
-            break
-        time.sleep(0.1)
-        _thread.start_new_thread(self.plotfig,())
+            #break
+            time.sleep(0.1)
+        #_thread.start_new_thread(self.plotfig,())
 
     def keyPressEvent(self, event):         #(0.1s+0.5s)
         while True:
             #print("press:" + str(event.key()))
-            if(event.key() == Qt.Key_8):
+            if(event.key() == Qt.Key_7):
                 self.probe = 1
                 self.send = 1
-            elif(event.key() == Qt.Key_Slash):
+            elif(event.key() == Qt.Key_Asterisk):
                 self.probe = 2
                 self.send = 2
-            elif(event.key() == Qt.Key_F2):
+            elif(event.key() == Qt.Key_F1):
                 self.probe = 3
                 self.send = 3
-            elif(event.key() == Qt.Key_5):
+            elif(event.key() == Qt.Key_4):
                 self.probe = 4
                 self.send = 4
-            elif(event.key() == Qt.Key_2):
+            elif(event.key() == Qt.Key_1):
                 self.probe = 5
                 self.send = 5
-            elif(event.key() == Qt.Key_Period):
+            elif(event.key() == Qt.Key_0):
                 self.probe = 6
                 self.send = 6
             #elif(event.key() == Qt.Key_Plus):
@@ -139,70 +139,121 @@ class Function(object):
                 pass
             break
         _thread.start_new_thread(self.buttonEvent,())
-        time.sleep(0.5)
+        time.sleep(0.1)
         #_thread.start_new_thread(self.keyPressEvent,())
 
     def buttonEvent(self):          #(0.1s+0.5s)
-        while True:
-            self.button1.setStyleSheet("QPushButton{border-radius: 10%;border: 1px solid black;background: url(/home/pi/aduio/images/filter_high.png) no-repeat cover center;}")
-            self.button2.setStyleSheet("QPushButton{border-radius: 10%;border: 1px solid black;background: url(/home/pi/aduio/images/filter_low.png) no-repeat cover center;}")
-            self.button3.setStyleSheet("QPushButton{border-radius: 10%;border: 1px solid black;background: url(/home/pi/aduio/images/brightness.png) no-repeat cover center;}")
-#            self.button5.setStyleSheet("QPushButton{border-radius: 10%;border: 1px solid black;background: url(/home/pi/aduio/images/com_probe.png) no-repeat cover center;}")
-#            self.button4.setStyleSheet("QPushButton{border-radius: 10%;border: 1px solid black;background: url(/home/pi/aduio/images/battery_levels.png) no-repeat cover center;}")
-            self.button1.setShortcut('')
-            self.button2.setShortcut('')
-            self.button3.setShortcut('')
-#            self.button4.setShortcut('')
-#            self.button5.setShortcut('')
+        #print(self.operate)
+        #while True:
+        self.button1.setStyleSheet("QPushButton{border-radius: 10%;border: 1px solid black;background: url(/home/pi/aduio/images/filter_high.png) no-repeat cover center;}")
+        self.button2.setStyleSheet("QPushButton{border-radius: 10%;border: 1px solid black;background: url(/home/pi/aduio/images/filter_low.png) no-repeat cover center;}")
+        self.button3.setStyleSheet("QPushButton{border-radius: 10%;border: 1px solid black;background: url(/home/pi/aduio/images/brightness.png) no-repeat cover center;}")
+#        self.button5.setStyleSheet("QPushButton{border-radius: 10%;border: 1px solid black;background: url(/home/pi/aduio/images/com_probe.png) no-repeat cover center;}")
+#        self.button4.setStyleSheet("QPushButton{border-radius: 10%;border: 1px solid black;background: url(/home/pi/aduio/images/battery_levels.png) no-repeat cover center;}")
+        self.button1.setShortcut('')
+        self.button2.setShortcut('')
+        self.button3.setShortcut('')
+#        self.button4.setShortcut('')
+#        self.button5.setShortcut('')
 
-            if(self.operate == 'menu'):
-                self.menu_flag = not self.menu_flag
-                if(self.index == 0):
+        if(self.operate == 'menu'):
+            self.menu_flag = not self.menu_flag
+            if(self.index == 0):
+                self.index = 1
+            else:
+                self.index = 0
+            self.operate = ''
+
+        elif(self.operate == 'up'):
+            if(self.menu_flag):
+                if(self.index == 1):
+                    self.index = 3
+                else:
+                    self.index = self.index-1
+            elif(not self.menu_flag):
+                if(self.index == 1):
+                    self.high_wave += 5
+                    self.choose_value.setProperty("value", self.high_wave)
+                elif(self.index == 2):
+                    self.low_wave += 5
+                    self.choose_value.setProperty("value", self.low_wave)
+                else:
+                    pass
+            self.operate = ''
+
+        elif(self.operate == 'down'):
+            if(self.menu_flag):
+                if(self.index == 3):
                     self.index = 1
                 else:
-                    self.index = 0
-                self.operate = ''
+                    self.index = self.index+1
+            elif(not self.menu_flag):
+                if(self.index == 1):
+                    self.high_wave -= 5
+                    self.choose_value.setProperty("value", self.high_wave)
+                elif(self.index == 2):
+                    self.low_wave -= 5
+                    self.choose_value.setProperty("value", self.low_wave)
+                else:
+                    pass
+            self.operate = ''
 
-            elif(self.operate == 'up'):
-                if(self.menu_flag):
-                    if(self.index == 1):
-                        self.index = 3
-                    else:
-                        self.index = self.index-1
-                self.operate = ''
+        elif(self.operate == 'confirm'):
+            self.choose_flag = not self.choose_flag
+#            if(self.menu_flag):
+#                if(self.index == 1):
+#                    self.button1.setStyleSheet("QPushButton{border-radius: 10%;border: 5px solid red;background: url(/home/pi/aduio/images/filter_high.png) no-repeat cover center;}")
+#                    self.button1.setShortcut('6')
+#                elif(self.index == 2):
+#                    self.button2.setStyleSheet("QPushButton{border-radius: 10%;border: 5px solid red;background: url(/home/pi/aduio/images/filter_low.png) no-repeat cover center;}")
+#                    self.button2.setShortcut('6')
+#                elif(self.index == 3):
+#                    self.button3.setStyleSheet("QPushButton{border-radius: 10%;border: 5px solid red;background: url(/home/pi/aduio/images/brightness.png) no-repeat cover center;}")
+#                    self.button3.setShortcut('6')
+#                    self.choose_value.setStyleSheet("QProgressBar{text-align: center;border:5px solid black;font-weight:bold}QProgressBar::chunk{background-color: rgb(255,127,0);}")
+#            else:
+#                self.button1.setStyleSheet("QPushButton{border-radius: 10%;border: 1px solid black;background: url(/home/pi/aduio/images/filter_high.png) no-repeat cover center;}")
+#                self.button2.setStyleSheet("QPushButton{border-radius: 10%;border: 1px solid black;background: url(/home/pi/aduio/images/filter_low.png) no-repeat cover center;}")
+#                self.button3.setStyleSheet("QPushButton{border-radius: 10%;border: 1px solid black;background: url(/home/pi/aduio/images/brightness.png) no-repeat cover center;}")
+#                self.button1.setShortcut('')
+#                self.button2.setShortcut('')
+#                self.button3.setShortcut('')
+            self.operate = ''
 
-            elif(self.operate == 'down'):
-                if(self.menu_flag):
-                    if(self.index == 3):
-                        self.index = 1
-                    else:
-                        self.index = self.index+1
-                    self.operate = ''
+        else:
+            pass
 
-#            elif(self.direction == 'confirm'):
-#                print(self.index)
-
-            else:
-                pass
-
+        if(self.menu_flag):
             if(self.index == 1):
                 self.button1.setStyleSheet("QPushButton{border-radius: 10%;border: 5px solid red;background: url(/home/pi/aduio/images/filter_high.png) no-repeat cover center;}")
-                self.button1.setShortcut('6')
+#                self.button1.setShortcut('6')
             elif(self.index == 2):
                 self.button2.setStyleSheet("QPushButton{border-radius: 10%;border: 5px solid red;background: url(/home/pi/aduio/images/filter_low.png) no-repeat cover center;}")
-                self.button2.setShortcut('6')
+#                self.button2.setShortcut('6')
             elif(self.index == 3):
                 self.button3.setStyleSheet("QPushButton{border-radius: 10%;border: 5px solid red;background: url(/home/pi/aduio/images/brightness.png) no-repeat cover center;}")
-                self.button3.setShortcut('6')
-#            elif(self.index == 4):
-#                self.button4.setStyleSheet("QPushButton{border-radius: 10%;border: 5px solid red;background: url(/home/pi/aduio/images/battery_levels.png) no-repeat cover center;}")
-#                self.button4.setShortcut('0')
-#            elif(self.index == 5):
-#                self.button5.setStyleSheet("QPushButton{border-radius: 10%;border: 5px solid red;background: url(/home/pi/aduio/images/com_probe.png) no-repeat cover center;}")
-#                self.button5.setShortcut('0')
+#                self.button3.setShortcut('6')
+                #self.choose_value.setStyleSheet("QProgressBar{text-align: center;border:5px solid black;font-weight:bold}QProgressBar::chunk{background-color: rgb(255,127,0);}")
+#        if(self.index == 1):
+#            self.button1.setStyleSheet("QPushButton{border-radius: 10%;border: 5px solid red;background: url(/home/pi/aduio/images/filter_high.png) no-repeat cover center;}")
+#            self.button1.setShortcut('6')
+#        elif(self.index == 2):
+#            self.button2.setStyleSheet("QPushButton{border-radius: 10%;border: 5px solid red;background: url(/home/pi/aduio/images/filter_low.png) no-repeat cover center;}")
+#            self.button2.setShortcut('6')
+#        elif(self.index == 3):
+#            self.button3.setStyleSheet("QPushButton{border-radius: 10%;border: 5px solid red;background: url(/home/pi/aduio/images/brightness.png) no-repeat cover center;}")
+#            self.button3.setShortcut('6')
+#        elif(self.index == 4):
+#            self.button4.setStyleSheet("QPushButton{border-radius: 10%;border: 5px solid red;background: url(/home/pi/aduio/images/battery_levels.png) no-repeat cover center;}")
+#            self.button4.setShortcut('0')
+#        elif(self.index == 5):
+#            self.button5.setStyleSheet("QPushButton{border-radius: 10%;border: 5px solid red;background: url(/home/pi/aduio/images/com_probe.png) no-repeat cover center;}")
+#            self.button5.setShortcut('0')
+#        else:
+#            pass
 
-            break
-
+            #break
+        #print(self.menu_flag,self.choose_flag)
         time.sleep(0.5)
         #_thread.start_new_thread(self.buttonEvent,())
 
@@ -261,6 +312,22 @@ class Function(object):
                     self.battery_power.setStyleSheet("QProgressBar{text-align: center;border:2px solid black}QProgressBar::chunk{background-color: rgb(254,67,42);}")
                 else:
                     pass
-            break
-        time.sleep(0.1)
-        _thread.start_new_thread(self.battery,())
+            else:
+                pass
+            #break
+            time.sleep(0.1)
+        #_thread.start_new_thread(self.battery,())
+
+    def filter_high(self):
+        #print(self.choose_flag)
+        if(self.choose_flag):
+            self.choose_value = QtWidgets.QProgressBar(self.widget)
+            self.choose_value.setGeometry(QtCore.QRect(1110, 80, 100, 481))
+            self.choose_value.setProperty("value", 0)
+            self.choose_value.setStyleSheet("QProgressBar{text-align: center;border:2px solid black;font-weight:bold}QProgressBar::chunk{background-color: rgb(255,127,0);}")
+            self.choose_value.setOrientation(QtCore.Qt.Vertical)
+            self.choose_value.setTextDirection(QtWidgets.QProgressBar.BottomToTop)
+            self.choose_value.setObjectName("choose_value")
+            self.power = 60
+        else:
+            pass

@@ -344,7 +344,7 @@
      <enum>Qt::LeftToRight</enum>
     </property>
     <property name="styleSheet">
-     <string notr="true">QProgressBar{text-align: center;border:2px solid black;font-weight:bold}QProgressBar::chunk{background-color: rgb(255,127,0);}</string>
+     <string notr="true">QProgressBar{text-align: center;border:5px solid black;font-weight:bold}QProgressBar::chunk{background-color: rgb(255,127,0);}</string>
     </property>
     <property name="minimum">
      <number>0</number>

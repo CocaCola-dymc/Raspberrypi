@@ -37,12 +37,35 @@ class Sound_Detection(QtWidgets.QWidget,Ui_Sound_Detection,Function):
         self.index = 0
         self.data = 0
         self.menu_flag = False
+        self.choose_flag = False
+        self.high_wave = 0
+        self.low_wave = 0
 
     def filter_high(self):
-        self.power = 50
+#        while True:
+#            self.choose_value.setStyleSheet("QProgressBar{text-align: center;border:5px solid red;font-weight:bold}QProgressBar::chunk{background-color: rgb(255,127,0);}")
+#            if(self.operate == 'up'):
+#                self.high_wave += 5
+#                self.choose_value.setProperty("value", self.high_wave)
+#            elif(self.operate == 'down'):
+#                self.high_wave -= 5
+#                self.choose_value.setProperty("value", self.high_wave)
+        self.power = 40
+#            self.operate = ''
+#            break
 
     def filter_low(self):
+#        while True:
+#            self.choose_value.setStyleSheet("QProgressBar{text-align: center;border:5px solid red;font-weight:bold}QProgressBar::chunk{background-color: rgb(255,127,0);}")
+#            if(self.operate == 'up'):
+#                self.low_wave += 5
+#                self.choose_value.setProperty("value", self.low_wave)
+#            elif(self.operate == 'down'):
+#                self.low_wave -= 5
+#                self.choose_value.setProperty("value", self.low_wave)
         self.power = 20
+#            self.operate = ''
+#            break
 
 #    def com_probe(self):
 #        self.power = 40
