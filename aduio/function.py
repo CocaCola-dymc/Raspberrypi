@@ -168,56 +168,79 @@ class Function(object):
             if(self.menu_flag):
                 if(self.index == 1):
                     self.index = 3
-                else:
-                    self.index = self.index-1
-            elif(not self.menu_flag):
+                    self.choose_value.setProperty("value", self.brightness)
+                elif(self.index == 2):
+                    self.index = 1
+                    self.choose_value.setProperty("value", self.high_wave)
+                elif(self.index == 3):
+                    self.index = 2
+                    self.choose_value.setProperty("value", self.low_wave)
+            elif(self.choose_flag):
                 if(self.index == 1):
                     self.high_wave += 5
+                    if(self.high_wave>100):
+                        self.high_wave = 100
                     self.choose_value.setProperty("value", self.high_wave)
                 elif(self.index == 2):
                     self.low_wave += 5
+                    if(self.low_wave>100):
+                        self.low_wave = 100
                     self.choose_value.setProperty("value", self.low_wave)
+                elif(self.index == 3):
+                    self.low_wave += 5
+                    if(self.brightness>100):
+                        self.brightness = 100
+                    self.choose_value.setProperty("value", self.brightness)
                 else:
                     pass
             self.operate = ''
 
         elif(self.operate == 'down'):
             if(self.menu_flag):
-                if(self.index == 3):
+                if(self.index == 1):
+                    self.index = 2
+                    self.choose_value.setProperty("value", self.low_wave)
+                elif(self.index == 2):
+                    self.index = 3
+                    self.choose_value.setProperty("value", self.brightness)
+                elif(self.index == 3):
                     self.index = 1
-                else:
-                    self.index = self.index+1
-            elif(not self.menu_flag):
+                    self.choose_value.setProperty("value", self.high_wave)
+            elif(self.choose_flag):
                 if(self.index == 1):
                     self.high_wave -= 5
+                    if(self.high_wave<0):
+                        self.high_wave = 0
                     self.choose_value.setProperty("value", self.high_wave)
                 elif(self.index == 2):
                     self.low_wave -= 5
+                    if(self.low_wave<0):
+                        self.low_wave = 0
                     self.choose_value.setProperty("value", self.low_wave)
+                elif(self.index == 3):
+                    self.low_wave -= 5
+                    if(self.brightness<0):
+                        self.brightness = 0
+                    self.choose_value.setProperty("value", self.brightness)
                 else:
                     pass
             self.operate = ''
 
         elif(self.operate == 'confirm'):
             self.choose_flag = not self.choose_flag
-#            if(self.menu_flag):
-#                if(self.index == 1):
-#                    self.button1.setStyleSheet("QPushButton{border-radius: 10%;border: 5px solid red;background: url(/home/pi/aduio/images/filter_high.png) no-repeat cover center;}")
-#                    self.button1.setShortcut('6')
-#                elif(self.index == 2):
-#                    self.button2.setStyleSheet("QPushButton{border-radius: 10%;border: 5px solid red;background: url(/home/pi/aduio/images/filter_low.png) no-repeat cover center;}")
-#                    self.button2.setShortcut('6')
-#                elif(self.index == 3):
-#                    self.button3.setStyleSheet("QPushButton{border-radius: 10%;border: 5px solid red;background: url(/home/pi/aduio/images/brightness.png) no-repeat cover center;}")
-#                    self.button3.setShortcut('6')
-#                    self.choose_value.setStyleSheet("QProgressBar{text-align: center;border:5px solid black;font-weight:bold}QProgressBar::chunk{background-color: rgb(255,127,0);}")
-#            else:
-#                self.button1.setStyleSheet("QPushButton{border-radius: 10%;border: 1px solid black;background: url(/home/pi/aduio/images/filter_high.png) no-repeat cover center;}")
-#                self.button2.setStyleSheet("QPushButton{border-radius: 10%;border: 1px solid black;background: url(/home/pi/aduio/images/filter_low.png) no-repeat cover center;}")
-#                self.button3.setStyleSheet("QPushButton{border-radius: 10%;border: 1px solid black;background: url(/home/pi/aduio/images/brightness.png) no-repeat cover center;}")
-#                self.button1.setShortcut('')
-#                self.button2.setShortcut('')
-#                self.button3.setShortcut('')
+            self.menu_flag = not self.menu_flag
+            if(self.choose_flag):
+                self.choose_value.setStyleSheet("QProgressBar{text-align: center;border:5px solid red;font-weight:bold;font-size:36px}QProgressBar::chunk{background-color: rgb(255,127,0);}")
+            elif(self.menu_flag):
+                self.choose_value.setStyleSheet("QProgressBar{text-align: center;border:5px solid black;font-weight:bold;font-size:36px}QProgressBar::chunk{background-color: rgb(255,127,0);}")
+                if(self.index == 1):
+                    self.choose_value.setProperty("value", self.high_wave)
+                elif(self.index == 2):
+                    self.choose_value.setProperty("value", self.low_wave)
+                elif(self.index == 3):
+                    self.choose_value.setProperty("value", self.brightness)
+                else:
+                    self.choose_value.setProperty("value", 0)
             self.operate = ''
 
         else:
@@ -234,24 +257,6 @@ class Function(object):
                 self.button3.setStyleSheet("QPushButton{border-radius: 10%;border: 5px solid red;background: url(/home/pi/aduio/images/brightness.png) no-repeat cover center;}")
 #                self.button3.setShortcut('6')
                 #self.choose_value.setStyleSheet("QProgressBar{text-align: center;border:5px solid black;font-weight:bold}QProgressBar::chunk{background-color: rgb(255,127,0);}")
-#        if(self.index == 1):
-#            self.button1.setStyleSheet("QPushButton{border-radius: 10%;border: 5px solid red;background: url(/home/pi/aduio/images/filter_high.png) no-repeat cover center;}")
-#            self.button1.setShortcut('6')
-#        elif(self.index == 2):
-#            self.button2.setStyleSheet("QPushButton{border-radius: 10%;border: 5px solid red;background: url(/home/pi/aduio/images/filter_low.png) no-repeat cover center;}")
-#            self.button2.setShortcut('6')
-#        elif(self.index == 3):
-#            self.button3.setStyleSheet("QPushButton{border-radius: 10%;border: 5px solid red;background: url(/home/pi/aduio/images/brightness.png) no-repeat cover center;}")
-#            self.button3.setShortcut('6')
-#        elif(self.index == 4):
-#            self.button4.setStyleSheet("QPushButton{border-radius: 10%;border: 5px solid red;background: url(/home/pi/aduio/images/battery_levels.png) no-repeat cover center;}")
-#            self.button4.setShortcut('0')
-#        elif(self.index == 5):
-#            self.button5.setStyleSheet("QPushButton{border-radius: 10%;border: 5px solid red;background: url(/home/pi/aduio/images/com_probe.png) no-repeat cover center;}")
-#            self.button5.setShortcut('0')
-#        else:
-#            pass
-
             #break
         #print(self.menu_flag,self.choose_flag)
         time.sleep(0.5)
@@ -296,20 +301,26 @@ class Function(object):
 
     def battery(self):
         while True:
-            #self.power = int(self.recv)
+            self.power = self.data
             #print(self.power)
             if(self.power_temp != self.power):
                 self.power_temp = self.power
                 self.battery_power.setProperty("value", self.power)
-                if(self.power >20 and self.power <= 100):
-                    self.label.setStyleSheet("background-image: url(images/power_g.png);background-repeat: no-repeat;")
-                    self.battery_power.setStyleSheet("QProgressBar{text-align: center;border:2px solid black}QProgressBar::chunk{background-color: rgb(26,250,41);}")
-                elif(self.power >10 and self.power <= 20):
-                    self.label.setStyleSheet("background-image: url(images/power_y.png);background-repeat: no-repeat;")
-                    self.battery_power.setStyleSheet("QProgressBar{text-align: center;border:2px solid black}QProgressBar::chunk{background-color: rgb(244,234,41);}")
-                elif(self.power <= 10):
-                    self.label.setStyleSheet("background-image: url(images/power_r.png);background-repeat: no-repeat;")
-                    self.battery_power.setStyleSheet("QProgressBar{text-align: center;border:2px solid black}QProgressBar::chunk{background-color: rgb(254,67,42);}")
+                if(self.power > 80):
+                    self.label.setStyleSheet("background-image: url(images/power_100.png);background-repeat: no-repeat;")
+                    self.battery_power.setStyleSheet("QProgressBar{border:2px solid gray;}QProgressBar::chunk{background-color: rgb(26,250,41);}")
+                elif(self.power > 60 and self.power <= 80):
+                    self.label.setStyleSheet("background-image: url(images/power_80.png);background-repeat: no-repeat;")
+                    self.battery_power.setStyleSheet("QProgressBar{border:2px solid gray;}QProgressBar::chunk{background-color: rgb(87,180,7);}")
+                elif(self.power > 40 and self.power <= 60):
+                    self.label.setStyleSheet("background-image: url(images/power_60.png);background-repeat: no-repeat;")
+                    self.battery_power.setStyleSheet("QProgressBar{border:2px solid gray;}QProgressBar::chunk{background-color: rgb(223,196,29);}")
+                elif(self.power > 20 and self.power <= 40):
+                    self.label.setStyleSheet("background-image: url(images/power_40.png);background-repeat: no-repeat;")
+                    self.battery_power.setStyleSheet("QProgressBar{border:2px solid gray;}QProgressBar::chunk{background-color: rgb(244,234,41);}")
+                elif(self.power <= 20):
+                    self.label.setStyleSheet("background-image: url(images/power_20.png);background-repeat: no-repeat;")
+                    self.battery_power.setStyleSheet("QProgressBar{border:2px solid gray;}QProgressBar::chunk{background-color: rgb(254,67,42);}")
                 else:
                     pass
             else:
@@ -318,16 +329,3 @@ class Function(object):
             time.sleep(0.1)
         #_thread.start_new_thread(self.battery,())
 
-    def filter_high(self):
-        #print(self.choose_flag)
-        if(self.choose_flag):
-            self.choose_value = QtWidgets.QProgressBar(self.widget)
-            self.choose_value.setGeometry(QtCore.QRect(1110, 80, 100, 481))
-            self.choose_value.setProperty("value", 0)
-            self.choose_value.setStyleSheet("QProgressBar{text-align: center;border:2px solid black;font-weight:bold}QProgressBar::chunk{background-color: rgb(255,127,0);}")
-            self.choose_value.setOrientation(QtCore.Qt.Vertical)
-            self.choose_value.setTextDirection(QtWidgets.QProgressBar.BottomToTop)
-            self.choose_value.setObjectName("choose_value")
-            self.power = 60
-        else:
-            pass

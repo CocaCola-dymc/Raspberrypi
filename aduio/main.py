@@ -40,8 +40,9 @@ class Sound_Detection(QtWidgets.QWidget,Ui_Sound_Detection,Function):
         self.choose_flag = False
         self.high_wave = 0
         self.low_wave = 0
+        self.brightness = 0
 
-    def filter_high(self):
+#    def filter_high(self):
 #        while True:
 #            self.choose_value.setStyleSheet("QProgressBar{text-align: center;border:5px solid red;font-weight:bold}QProgressBar::chunk{background-color: rgb(255,127,0);}")
 #            if(self.operate == 'up'):
@@ -50,11 +51,11 @@ class Sound_Detection(QtWidgets.QWidget,Ui_Sound_Detection,Function):
 #            elif(self.operate == 'down'):
 #                self.high_wave -= 5
 #                self.choose_value.setProperty("value", self.high_wave)
-        self.power = 40
+#        self.power = 40
 #            self.operate = ''
 #            break
 
-    def filter_low(self):
+#    def filter_low(self):
 #        while True:
 #            self.choose_value.setStyleSheet("QProgressBar{text-align: center;border:5px solid red;font-weight:bold}QProgressBar::chunk{background-color: rgb(255,127,0);}")
 #            if(self.operate == 'up'):
@@ -63,7 +64,7 @@ class Sound_Detection(QtWidgets.QWidget,Ui_Sound_Detection,Function):
 #            elif(self.operate == 'down'):
 #                self.low_wave -= 5
 #                self.choose_value.setProperty("value", self.low_wave)
-        self.power = 20
+#        self.power = 20
 #            self.operate = ''
 #            break
 
@@ -73,8 +74,8 @@ class Sound_Detection(QtWidgets.QWidget,Ui_Sound_Detection,Function):
 #    def battery_levels(self):
 #        self.power = 20
 
-    def brightness(self):
-        self.power = 10
+#    def brightness(self):
+#        self.power = 10
 
 
 if __name__ == "__main__":

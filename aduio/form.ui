@@ -222,7 +222,7 @@
      </size>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton{border-radius: 10%;border: 1px solid black;background: url(/home/pi/aduio/images/com_probe.png) no-repeat cover center;}QPushButton:hover{border: 2px solid red;}</string>
+     <string notr="true">QPushButton{border-radius: 10%;border: 1px solid black;background: url(/home/pi/aduio/images/brightness.png) no-repeat cover center;}QPushButton:hover{border: 2px solid red;}</string>
     </property>
     <property name="text">
      <string/>
@@ -253,7 +253,7 @@
      </size>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton{border-radius: 10%;border: 1px solid black;background: url(/home/pi/aduio/images/brightness.png) no-repeat cover center;}QPushButton:hover{border: 2px solid red;}</string>
+     <string notr="true">QPushButton{border-radius: 10%;border: 1px solid black;background: url(/home/pi/aduio/images/com_probe.png) no-repeat cover center;}QPushButton:hover{border: 2px solid red;}</string>
     </property>
     <property name="text">
      <string/>
@@ -303,16 +303,22 @@
     <property name="geometry">
      <rect>
       <x>910</x>
-      <y>20</y>
+      <y>10</y>
       <width>118</width>
-      <height>24</height>
+      <height>41</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
     <property name="styleSheet">
-     <string notr="true">QProgressBar{text-align:center;border:2px solid black}QProgressBar::chunk{background-color:write;}</string>
+     <string notr="true">QProgressBar{text-align:center;border:2px solid gray;}QProgressBar::chunk{background-color:write;}</string>
     </property>
     <property name="value">
      <number>24</number>
+    </property>
+    <property name="textVisible">
+     <bool>false</bool>
     </property>
    </widget>
    <widget class="QLabel" name="label">
@@ -325,7 +331,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-image: url(/home/pi/aduio/images/power_g.png);background-repeat: no-repeat;</string>
+     <string notr="true">background-image: url(/home/pi/aduio/images/power_100.png);background-repeat: no-repeat;</string>
     </property>
     <property name="text">
      <string/>
