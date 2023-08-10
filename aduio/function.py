@@ -150,11 +150,6 @@ class Function(object):
         self.button3.setStyleSheet("QPushButton{border-radius: 10%;border: 1px solid black;background: url(/home/pi/aduio/images/brightness.png) no-repeat cover center;}")
 #        self.button5.setStyleSheet("QPushButton{border-radius: 10%;border: 1px solid black;background: url(/home/pi/aduio/images/com_probe.png) no-repeat cover center;}")
 #        self.button4.setStyleSheet("QPushButton{border-radius: 10%;border: 1px solid black;background: url(/home/pi/aduio/images/battery_levels.png) no-repeat cover center;}")
-        self.button1.setShortcut('')
-        self.button2.setShortcut('')
-        self.button3.setShortcut('')
-#        self.button4.setShortcut('')
-#        self.button5.setShortcut('')
 
         if(self.operate == 'menu'):
             self.menu_flag = not self.menu_flag
@@ -187,7 +182,7 @@ class Function(object):
                         self.low_wave = 100
                     self.choose_value.setProperty("value", self.low_wave)
                 elif(self.index == 3):
-                    self.low_wave += 5
+                    self.brightness += 5
                     if(self.brightness>100):
                         self.brightness = 100
                     self.choose_value.setProperty("value", self.brightness)
@@ -218,7 +213,7 @@ class Function(object):
                         self.low_wave = 0
                     self.choose_value.setProperty("value", self.low_wave)
                 elif(self.index == 3):
-                    self.low_wave -= 5
+                    self.brightness -= 5
                     if(self.brightness<0):
                         self.brightness = 0
                     self.choose_value.setProperty("value", self.brightness)
@@ -239,8 +234,8 @@ class Function(object):
                     self.choose_value.setProperty("value", self.low_wave)
                 elif(self.index == 3):
                     self.choose_value.setProperty("value", self.brightness)
-                else:
-                    self.choose_value.setProperty("value", 0)
+#                else:
+#                    self.choose_value.setProperty("value", 0)
             self.operate = ''
 
         else:
