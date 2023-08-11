@@ -12,6 +12,7 @@ import _thread
 import serial
 import pygame
 import re
+import os
 import matplotlib.animation as animation
 
 class Function(object):
@@ -135,6 +136,9 @@ class Function(object):
             elif(event.key() == Qt.Key_6):
                 self.send = 0
                 self.operate = 'confirm'
+            elif(event.key() == Qt.Key_3):
+                self.operate = 'shutdown'
+#                os.system('sudo shutdown -h now')
             else:
                 pass
             break
@@ -152,11 +156,16 @@ class Function(object):
 #        self.button4.setStyleSheet("QPushButton{border-radius: 10%;border: 1px solid black;background: url(/home/pi/aduio/images/battery_levels.png) no-repeat cover center;}")
 
         if(self.operate == 'menu'):
-            self.menu_flag = not self.menu_flag
-            if(self.index == 0):
-                self.index = 1
+            if(self.choose_flag):
+                pass
             else:
-                self.index = 0
+                self.menu_flag = not self.menu_flag
+                if(self.menu_flag):
+                    self.choose_value.setStyleSheet("QProgressBar{text-align: center;border:5px solid black;font-weight:bold;font-size:36px}QProgressBar::chunk{background-color: rgb(255,127,0);}")
+                    if(self.index == 0):
+                        self.index = 1
+                else:
+                    self.index = 0
             self.operate = ''
 
         elif(self.operate == 'up'):
@@ -222,22 +231,37 @@ class Function(object):
             self.operate = ''
 
         elif(self.operate == 'confirm'):
-            self.choose_flag = not self.choose_flag
-            self.menu_flag = not self.menu_flag
-            if(self.choose_flag):
+            if(self.menu_flag):
+                #self.choose_flag = not self.choose_flag
+                #self.menu_flag = not self.menu_flag
+                self.choose_flag = True
+                self.menu_flag = False
                 self.choose_value.setStyleSheet("QProgressBar{text-align: center;border:5px solid red;font-weight:bold;font-size:36px}QProgressBar::chunk{background-color: rgb(255,127,0);}")
-            elif(self.menu_flag):
-                self.choose_value.setStyleSheet("QProgressBar{text-align: center;border:5px solid black;font-weight:bold;font-size:36px}QProgressBar::chunk{background-color: rgb(255,127,0);}")
                 if(self.index == 1):
                     self.choose_value.setProperty("value", self.high_wave)
                 elif(self.index == 2):
                     self.choose_value.setProperty("value", self.low_wave)
                 elif(self.index == 3):
                     self.choose_value.setProperty("value", self.brightness)
-#                else:
-#                    self.choose_value.setProperty("value", 0)
+            elif(self.choose_flag):
+                self.choose_value.setStyleSheet("QProgressBar{text-align: center;border:5px solid black;font-weight:bold;font-size:36px}QProgressBar::chunk{background-color: rgb(255,127,0);}")
+                self.choose_flag = False
+                self.menu_flag = True
+            else:
+                print('open microphone')
             self.operate = ''
 
+        elif(self.operate == 'shutdown'):
+            if(not self.shutdown_flag):
+                self.operate = ''
+            elif(self.shutdown_flag):
+                time.sleep(3)
+                self.operate = 'shutdown'
+            self.shutdown_flag = not self.shutdown_flag
+            if(self.operate == 'shutdown'):
+                os.system('sudo shutdown -h now')
+            else:
+                pass
         else:
             pass
 

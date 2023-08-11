@@ -26,7 +26,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: white;</string>
+    <string notr="true">background-color: white;background: url(/home/pi/aduio/images/nosignal.png) no-repeat cover center;</string>
    </property>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">

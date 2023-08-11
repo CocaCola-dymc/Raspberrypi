@@ -41,6 +41,7 @@ class Sound_Detection(QtWidgets.QWidget,Ui_Sound_Detection,Function):
         self.high_wave = 0
         self.low_wave = 0
         self.brightness = 0
+        self.shutdown_flag = False
 
 #    def filter_high(self):
 #        while True:
